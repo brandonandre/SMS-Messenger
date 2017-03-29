@@ -1,3 +1,4 @@
 <resources>
     <string name="welcome">A new way to send SMS text messages</string>
+    <string name="inbox">Inbox</string>
 </resources>

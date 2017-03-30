@@ -20,22 +20,29 @@ public class SmsReceiver extends BroadcastReceiver {
 
         String strMessage = "";
 
+        // Make sure the data is there!
         if ( extras != null )
         {
             Object[] smsextras = (Object[]) extras.get( "pdus" );
 
-            for ( int i = 0; i < smsextras.length; i++ )
-            {
-                SmsMessage smsmsg = SmsMessage.createFromPdu((byte[])smsextras[i]);
+            if (smsextras != null) {
+                for (Object smsextra : smsextras) {
+                    // TODO impliment the newest createFromPdu Format for better support!
+                    SmsMessage smsmsg = SmsMessage.createFromPdu((byte[]) smsextra);
 
-                String strMsgBody = smsmsg.getMessageBody().toString();
-                String strMsgSrc = smsmsg.getOriginatingAddress();
+                    // Get the message body from the server.
+                    String strMsgBody = smsmsg.getMessageBody();
 
-                strMessage += "SMS from " + strMsgSrc + " : " + strMsgBody;
+                    //Get the address from where it came from.
+                    String strMsgSrc = smsmsg.getOriginatingAddress();
 
-                Log.i(TAG, strMessage);
+                    strMessage += "SMS from " + strMsgSrc + " : " + strMsgBody;
+
+                    Log.i(TAG, strMessage);
+                }
+            } else {
+                // TODO handle error, should not be reachable but never know anymore...
             }
-
         }
     }
 }

@@ -39,6 +39,8 @@ public class SmsReceiver extends BroadcastReceiver {
                     strMessage += "SMS from " + strMsgSrc + " : " + strMsgBody;
 
                     Log.i(TAG, strMessage);
+
+                    //TODO Add to database!
                 }
             } else {
                 // TODO handle error, should not be reachable but never know anymore...
